@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdamsDatabase.FXML2Controller">
+    <stylesheets>
+        <URL value="@stylesCSS.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="btnRegister" layoutX="311.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleBtnRegister" prefHeight="25.0" prefWidth="75.0" text="Register">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnLogIn" layoutX="311.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleBtnLoginClicked" prefHeight="25.0" prefWidth="75.0" text="Log in">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
+      <TextField fx:id="inputUsername" layoutX="133.0" layoutY="175.0" />
+      <TextField fx:id="inputPassword" layoutX="133.0" layoutY="213.0" />
+      <TextArea fx:id="textNewAccount" blendMode="DARKEN" layoutX="91.0" layoutY="296.0" prefHeight="49.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Don't have an account?">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="textUsername" blendMode="DARKEN" editable="false" layoutX="26.0" layoutY="170.0" prefHeight="43.0" prefWidth="115.0" style="-fx-background-color: transparent;" text="Username">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="textPassword" blendMode="DARKEN" editable="false" layoutX="27.0" layoutY="208.0" prefHeight="61.0" prefWidth="115.0" style="-fx-background-color: transparent;" text="Password&#10;">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="textWelcome" blendMode="DARKEN" editable="false" layoutX="223.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="177.0" style="-fx-background-color: transparent;" text="Welcome">
+         <font>
+            <Font name="Arial Bold" size="26.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="textIncorrect" blendMode="DARKEN" editable="false" layoutX="91.0" layoutY="245.0" prefHeight="49.0" prefWidth="272.0" style="-fx-background-color: transparent; -fx-text-fill: red;" text="Username/password incorrect">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>
