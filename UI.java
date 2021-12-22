@@ -94,11 +94,13 @@ public class UI {
            cusUsername=user.next();
            commander.queryUserSearchByUsername(cusUsername);
            
-           System.out.print("\n\nEnter the new password (enter q to return to menu):\n\n");
+           System.out.print("\n\nEnter the new password (enter q to return to the menu):\n\n");
            String newPass = user.next();
            
            if(!("q".equals(newPass))){ //if answer is NOT q, password is changed
+              newPass = commander.encryptPassword(newPass);
               commander.changePassword(cusUsername, newPass);
+              
               System.out.println("PASSWORD CHANGED\n\n");}}
        
  
@@ -117,9 +119,10 @@ public class UI {
            String password; //store's password of new customer 
            String email; //store's email of new customer 
            
-           System.out.println("\n\nEnter the first name of the customer:\n\n");
+           System.out.println("\n\nEnter the first name of the customer (enter 0 to return to the menu):\n\n");
            firstName=user.next();
            
+           if (!("0".equals(firstName))){
            System.out.println("\n\nEnter the last name of the customer:\n\n");
            lastName=user.next();
            
@@ -128,6 +131,7 @@ public class UI {
            
            System.out.println("\n\nEnter a password for the customer:\n\n");
            password=user.next();
+           password=commander.encryptPassword(password);
            
            System.out.println("\n\nEnter the email of the customer:\n\n");
            email=user.next();
@@ -135,6 +139,7 @@ public class UI {
            commander.insertNewCustomer(firstName, lastName, username, password, email); //inserts the new customer into the database
            
            System.out.println("\n\nCUSTOMER ADDED\n");
+           }
            }
        
        
@@ -144,6 +149,7 @@ public class UI {
        
        if (answer==12) {
            commander.queryShowAllEmployees();}
+
        
        } //end of while loop
        
