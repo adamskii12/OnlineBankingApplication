@@ -25,7 +25,7 @@ import java.util.List;
 public class TableCommander {
         final String url = "jdbc:mysql://localhost:3306/mysql"; //used to connect to database
         final String username="root"; //username used to connect to database
-        final String password="9384103"; //password used to connect to database
+        final String password="4695780"; //password used to connect to database
         String sql = ""; //used to store different SQL commands
 
 
@@ -762,7 +762,135 @@ public class TableCommander {
                     executeSQLCommand(sql);    
         }  
            
+        
+        
+           //PASSWORD ENCRPYTION PROCESS
+           //
+           //Takes the password from the parameter, reverses the string, and encrypts each character
+           //according to the criteria (refer to the encryptCharacter method)
+        protected String encryptPassword(String cusPassword){
+                String encryptedPassword=""; //initializes the encrypted password
+                
+                for (int i=0;i<cusPassword.length();i++){
+                    char character = cusPassword.charAt(cusPassword.length()-i-1); //stores the last character of the inputted password
+ 
+                    character = encryptCharacter(character); //encrypts character
+                    
+                    encryptedPassword = encryptedPassword + character; //add the encrypted character to the encrypted password   
+                }         
+                
+                return encryptedPassword; //returns the resulting encrypted password
+        }
+        
+        
+        
+        
+           //PASSWORD DECRYPTION PROCESS
+           //
+           //Takes the encrypted password from the parameter and decrypts it by reversing the string and decrypting each character
+           //according to the encrpytion criteria (refer to decryptCharacter method)
+        protected String decryptPassword(String encryptedPassword){
+                String decryptedPassword=""; //initializes our decrypted password
+                
+                for (int i=0;i<encryptedPassword.length();i++){
+                    char character = encryptedPassword.charAt(encryptedPassword.length()-i-1); //stores the last character of the encrypted password
+ 
+                    character = decryptCharacter(character); //decrypts character
+                    
+                    decryptedPassword = decryptedPassword + character; //add the decrypted character to the decrypted password   
+                }         
+                
+                return decryptedPassword; //returns decrypted password
+        }
+        
+        
+        
+        //CHARACTER ENCRYPTION PROCESS
+        //
+        //Takes the ASCII code of the character from the parameter and alters it depending on the character criteria
+        protected char encryptCharacter (char character){
+         
+                int ascii = (int) character; //gets the ASCII code of the character and stores it in the variable
+                boolean done=false; //once the character is within one the following ranges, this will be set to true
+                    
+                if (48<=ascii && ascii<=52){ //if the character is between 0-4, increase its ASCII code by 7
+                    ascii = ascii+7;
+                    done=true;
+                }
+
+                if (53<=ascii && ascii<=57 && done==false){ //if the character is between 5-9, decrease its ASCII code by 9
+                    ascii = ascii-9;
+                    done=true;
+                }   
+                    
+                if (65<=ascii && ascii<=77 && done==false){ //if the character is between A-M, increase its ASCII code by 11
+                    ascii = ascii+11;
+                    done=true;
+                }
+                   
+                if (78<=ascii && ascii<=90 && done==false){ //if the character is between N-Z, decrease its ASCII code by 17
+                    ascii = ascii-17;
+                    done=true;
+                }
+                    
+                if (97<=ascii && ascii<=109 && done==false){ //if the character is between a-m, decrease its ASCII code by 8
+                    ascii = ascii-8;
+                    done=true;
+                }
+                    
+                if (110<=ascii && ascii<=122 && done==false) //if the character is between n-z, decrease its ASCII code by 6
+                    ascii = ascii-6;
+
+                character = (char) ascii; //change the encrypted ASCII code back to its character form
+
+            return character; //return the encrypted character
+        }
            
+        
+        
+        //CHARACTER DECRYPTION PROCESS
+        //
+        //Takes the encrypted ASCII code of the character from the parameter and alters it depending on the character criteria
+        protected char decryptCharacter (char character){
+        
+            int ascii = (int) character; //gets the ASCII code of the character and stores it in variable 
+            boolean done=false; //once the character is within one of the following ranges, this is set to true
+                    
+            
+                if (55<=ascii && ascii<=59){ //if the ASCII code of the character is between 55-59, it was 0-4 pre-encryption, so decrease its ASCII code by 7
+                    ascii = ascii-7;
+                    done=true;
+                }
+                
+                if (44<=ascii && ascii<=48 && done==false){ //if the ASCII code of the character is between 44-48, it was 5-9 pre-encryption, so increase its ASCII code by 9
+                    ascii = ascii+9;
+                     done=true;
+                }   
+                      
+                if (76<=ascii && ascii<88 && done==false){ //if the ASCII code of the character is between 76-88, it was A-M pre-encryption, so decrease its ASCII code by 11
+                    ascii = ascii-11;
+                    done=true;
+                }
+                    
+                if (61<=ascii && ascii<=73 && done==false){ //if the ASCII code of the character is between 61-73, it was N-Z pre-encryption, so increase its ASCII code by 17
+                    ascii = ascii+17;
+                    done=true;
+                }
+                    
+                if (89<=ascii && ascii<=101 && done==false){ //if the ASCII code of the character is between 89-101, it was a-m pre-encryption, so increase its ASCII code by 8
+                    ascii = ascii+8;
+                    done=true;
+                }
+                    
+                if (104<=ascii && ascii<=116 && done==false) //if the ASCII code of the character is between 104-116, it was n-z pre-encryption, so increase its ASCII code by 6
+                    ascii = ascii+6;
+                
+                character = (char) ascii; //changes the decrypted ASCII code back to its character form
+
+            return character; //returns the decrypted character
+        }
+        
+        
         
            //drops ALL constraints for ALL tables at once
            //
